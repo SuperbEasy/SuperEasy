@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Eye Relaxation</title>
+    <style>
+        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',Roboto,sans-serif;background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}.glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,0.03);filter:blur(100px);border-radius:50%;z-index:0;animation:p 8s infinite alternate}@keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}#app{width:90%;max-width:420px;padding:40px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,0.03);border-radius:40px;box-shadow:0 30px 60px rgba(0,0,0,.8);display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px)}.t-wrap,.c-wrap{display:flex;align-items:center;gap:15px}.t-btn{background:none;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:all .2s}.t-btn:hover{color:#80cbc4;border-color:#80cbc4}#timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}h2{color:#80cbc4;font-weight:300;margin:10px 0;font-size:20px}#eyeDisplay{font-size:120px;margin:25px 0;transition:all 1.5s cubic-bezier(0.4,0,0.2,1)}.slider-container{width:100%;margin:15px 0;text-align:center}input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:none;margin-top:12px}input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:#80cbc4;border-radius:50%;cursor:pointer}label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}.controls{display:flex;gap:25px;margin-top:15px}.icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:all .3s ease}.icon-btn:hover{border-color:#80cbc4;transform:scale(1.05)}.icon-btn img{width:22px;filter:invert(1);opacity:.7}.status-text{margin-top:15px;font-size:14px;color:#aaa;font-style:italic;font-weight:500}h3{font-weight:400;font-size:14px;color:#888;margin:10px 0}
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <div id="app">
+        <div class="t-wrap">
+            <button class="t-btn" onclick="adjustMainTimer(-15)">-</button>
+            <div id="timer">01:00:00</div>
+            <button class="t-btn" onclick="adjustMainTimer(15)">+</button>
+        </div>
+
+        <h2>My Eye Relaxation</h2>
+        <div id="eyeDisplay">👁️</div>
+
+        <div class="slider-container">
+            <label>Rest Interval: <span id="valDisplay" style="color:#80cbc4">5</span>s</label><br>
+            <input type="range" id="restRange" min="3" max="10" value="5" 
+                   oninput="document.getElementById('valDisplay').textContent=this.value">
+        </div>
+
+        <div class="controls">
+            <button class="icon-btn" onclick="startSession()">
+                <img src="https://img.icons8.com/ios-filled/100/play--v1.png" alt="Start">
+            </button>
+            <button class="icon-btn" onclick="stopSession()">
+                <img src="https://img.icons8.com/ios-filled/100/stop.png" alt="Stop">
+            </button>
+        </div>
+
+        <div class="status-text" id="statusMsg">Ready for peace</div>
+
+        <div class="c-wrap">
+            <button class="t-btn" onclick="adjustCycles(-1)">-</button>
+            <h3>Cycle: <span id="currCnt">0</span> / <span id="maxCnt">15</span></h3>
+            <button class="t-btn" onclick="adjustCycles(1)">+</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration Constants ---
+        const DEFAULT_TIMER_SECONDS = 3600; // 1 hour in seconds
+
+        // --- State Variables ---
+        let currentCycle = 0;
+        let isRunning = false;
+        let backgroundTimerId;
+        let timeRemaining = DEFAULT_TIMER_SECONDS; 
+        let targetCycles = 15;
+        let audioCtx, oscillator, gainNode, preferredVoice;
+
+        const cycleEl = document.getElementById("currCnt");
+        const timerEl = document.getElementById("timer");
+        const restInput = document.getElementById("restRange");
+        const eyeEl = document.getElementById("eyeDisplay");
+        const statusEl = document.getElementById("statusMsg");
+        const maxCycleEl = document.getElementById("maxCnt");
+
+        // --- Notification Logic ---
+        function notifyUser(msg) {
+            if (!("Notification" in window)) return;
+            if (Notification.permission === "granted") {
+                new Notification("Eye Relaxer", { body: msg, icon: "https://img.icons8.com/ios-filled/100/80cbc4/eye.png" });
+            }
+        }
+
+        // --- Audio & Speech Setup ---
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(120, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+            }
+        }
+
+        function setVolumeFade(active) {
+            if (gainNode) gainNode.gain.setTargetAtTime(active ? 0.15 : 0, audioCtx.currentTime, 0.5);
+        }
+
+        function loadVoice() {
+            const v = speechSynthesis.getVoices();
+            preferredVoice = v.find(x => x.name.includes("Google US English")) || v.find(x => x.name.includes("female")) || v[0];
+        }
+        speechSynthesis.onvoiceschanged = loadVoice;
+
+        function speakPrompt(text) {
+            speechSynthesis.cancel();
+            const msg = new SpeechSynthesisUtterance(text);
+            if (preferredVoice) msg.voice = preferredVoice;
+            msg.rate = 0.75;
+            speechSynthesis.speak(msg);
+        }
+
+        // --- Core Session Logic ---
+        async function startSession() {
+            if (isRunning) return;
+
+            if ("Notification" in window && Notification.permission !== "denied") {
+                await Notification.requestPermission();
+            }
+
+            alert("Set volume to 5-10%. Adjust the slider after the first cycle if it's too slow or fast.");
+
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            isRunning = true;
+            currentCycle = 0;
+            statusEl.textContent = "Beginning session...";
+            runCycleStep();
+        }
+
+        function runCycleStep() {
+            if (!isRunning) return;
+
+            if (currentCycle >= targetCycles) {
+                eyeEl.textContent = "✨";
+                setVolumeFade(false);
+                speakPrompt("Session complete. Your eyes are now refreshed.");
+                notifyUser("Session Complete! Great job.");
+                statusEl.textContent = "Finished";
+                isRunning = false;
+                return;
+            }
+
+            currentCycle++;
+            cycleEl.textContent = currentCycle;
+            eyeEl.textContent = "😌";
+            eyeEl.style.filter = "blur(10px)";
+            setVolumeFade(true);
+            speakPrompt("Close your eyes");
+
+            setTimeout(() => {
+                if (!isRunning) return;
+                eyeEl.textContent = "👁️";
+                eyeEl.style.filter = "blur(0px)";
+                setVolumeFade(false);
+                speakPrompt("Slowly open");
+                setTimeout(() => { if (isRunning) runCycleStep(); }, 4000);
+            }, restInput.value * 1000);
+        }
+
+        function stopSession() {
+            isRunning = false;
+            speechSynthesis.cancel();
+            if (gainNode) setVolumeFade(false);
+            eyeEl.textContent = "👁️";
+            eyeEl.style.filter = "blur(0px)";
+            statusEl.textContent = "Stopped";
+        }
+
+        function adjustMainTimer(mins) {
+            timeRemaining = Math.max(0, timeRemaining + (mins * 60));
+            timerEl.textContent = formatTime(timeRemaining);
+        }
+
+        function adjustCycles(delta) {
+            targetCycles = Math.max(1, targetCycles + delta);
+            maxCycleEl.textContent = targetCycles;
+        }
+
+        function formatTime(s) {
+            return [Math.floor(s/3600), Math.floor(s%3600/60), s%60].map(v => String(v).padStart(2, "0")).join(":");
+        }
+
+        function startClock() {
+            backgroundTimerId = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    timerEl.textContent = formatTime(timeRemaining);
+                } else {
+                    speakPrompt("It is time for your eye break.");
+                    notifyUser("Time for your eye break!");
+                    // Reset using the constant
+                    timeRemaining = DEFAULT_TIMER_SECONDS; 
+                    timerEl.textContent = formatTime(timeRemaining);
+                }
+            }, 1000);
+        }
+
+        loadVoice();
+        startClock();
+    </script>
+</body>
+</html>
