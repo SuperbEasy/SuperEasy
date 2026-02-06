@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Eye Relaxation - SuperEasy</title>
+    <title>My Eye Relaxation</title>
     <style>
-        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',sans-serif;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}#app{width:90%;max-width:420px;padding:35px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.03);border-radius:40px;box-shadow:0 30px 60px #000;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px);transition:background 3s ease,transform 0.5s ease}.glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,.03);filter:blur(100px);border-radius:50%;animation:p 8s infinite alternate}@keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}h2{color:#80cbc4;font-weight:300;margin:0 0 20px 0;font-size:24px}.controls{display:flex;gap:30px;margin-bottom:20px}.icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:75px;height:75px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:.3s}.icon-btn:hover{border-color:#80cbc4;transform:scale(1.1)}.icon-btn img{width:30px;filter:invert(1);opacity:.8}.play-flash{animation:flash 2s infinite;border-color:rgba(128,203,196,0.5)}@keyframes flash{0%{box-shadow:0 0 0 0 rgba(128,203,196,0.4)}70%{box-shadow:0 0 0 15px rgba(128,203,196,0)}100%{box-shadow:0 0 0 0 rgba(128,203,196,0)}}#eyeDisplay{font-size:120px;margin:10px 0;transition:all 3s cubic-bezier(.4,0,.2,1);filter:blur(0px);opacity:1}.slider-container{width:100%;margin:20px 0;text-align:center}input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:0;margin-top:12px}input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;background:#80cbc4;border-radius:50%;cursor:pointer}label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}.status-text{margin-top:5px;font-size:14px;color:#aaa;font-style:italic}.t-wrap{display:flex;align-items:center;gap:15px;margin-top:20px}.t-btn{background:0 0;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:.2s}.t-btn:hover{color:#80cbc4;border-color:#80cbc4}#timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}.c-wrap{display:flex;align-items:center;gap:15px;margin-top:10px}h3{font-weight:400;font-size:13px;color:#888}.app-footer{margin-top:25px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.05);width:100%;text-align:center;font-size:11px;color:#80cbc4;line-height:1.6}.privacy-tag{color:#555;font-size:9px;font-weight:700;letter-spacing:1px;margin-top:5px}.resting #app{background:rgba(10,10,10,0.98);transform:scale(0.98)}.resting #eyeDisplay{filter:blur(25px);opacity:0.3;transform:scale(0.9)}.hit-badge{vertical-align: middle; margin-left: 5px; opacity: 0.8;}
+        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',sans-serif;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}
+        #app{width:90%;max-width:420px;padding:35px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.03);border-radius:40px;box-shadow:0 30px 60px #000;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px);transition:background 3s ease,transform 0.5s ease}
+        .glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,.02);filter:blur(100px);border-radius:50%;animation:p 8s infinite alternate}
+        @keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}
+        h2{color:#80cbc4;font-weight:300;margin:0 0 20px 0;font-size:24px;letter-spacing:1px}
+        .controls{display:flex;gap:30px;margin-bottom:20px}
+        .icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:75px;height:75px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:.3s}
+        .icon-btn:hover{border-color:#80cbc4;transform:scale(1.1)}
+        .icon-btn img{width:30px;filter:invert(1);opacity:.8}
+        .play-flash{animation:flash 2s infinite;border-color:rgba(128,203,196,0.5)}
+        @keyframes flash{0%{box-shadow:0 0 0 0 rgba(128,203,196,0.4)}70%{box-shadow:0 0 0 15px rgba(128,203,196,0)}100%{box-shadow:0 0 0 0 rgba(128,203,196,0)}}
+        #eyeDisplay{font-size:120px;margin:10px 0;transition:all 3s cubic-bezier(.4,0,.2,1);filter:blur(0px);opacity:1}
+        .slider-container{width:100%;margin:20px 0;text-align:center}
+        input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:0;margin-top:12px}
+        input[type=range]::-webkit-slider-thumb{appearance:none;width:20px;height:20px;background:#80cbc4;border-radius:50%;cursor:pointer}
+        label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}
+        
+        .status-text{margin-top:5px;font-size:22px;color:#80cbc4;font-weight:700;letter-spacing:2px;text-transform:uppercase;min-height:35px}
+        .status-ready{font-style: italic; color: #5fb3ac;}
+        
+        .t-wrap{display:flex;flex-direction:column;align-items:center;margin-top:20px;gap:5px}
+        .timer-controls{display:flex;align-items:center;gap:15px}
+        .t-btn{background:0 0;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:.2s}
+        .t-btn:hover{color:#80cbc4;border-color:#80cbc4}
+        #timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}
+        .reminder-label{font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px}
+
+        .c-wrap{display:flex;align-items:center;gap:15px;margin-top:10px}
+        h3{font-weight:400;font-size:13px;color:#888}
+        .app-footer{margin-top:25px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.05);width:100%;text-align:center;font-size:11px;color:#80cbc4;line-height:1.6}
+        .privacy-tag{color:#555;font-size:9px;font-weight:700;letter-spacing:1px;margin-top:5px}
+        .resting #app{background:rgba(10,10,10,0.98);transform:scale(0.98)}
+        .resting #eyeDisplay{filter:blur(25px);opacity:0.3;transform:scale(0.9)}
+        .hit-badge{vertical-align: middle; margin-left: 5px; opacity: 0.9;}
     </style>
 </head>
 <body>
@@ -16,36 +49,38 @@
         <h2>My Eye Relaxation</h2>
 
         <div class="controls">
-            <button id="playBtn" class="icon-btn play-flash" onclick="startSession()"><img src="https://img.icons8.com/ios-filled/100/play--v1.png"></button>
-            <button class="icon-btn" onclick="stopSession()"><img src="https://img.icons8.com/ios-filled/100/stop.png"></button>
+            <button id="playBtn" class="icon-btn play-flash" onclick="startSession()"><img src="https://img.icons8.com/ios-filled/100/play--v1.png" alt="Play"></button>
+            <button class="icon-btn" onclick="stopSession()"><img src="https://img.icons8.com/ios-filled/100/stop.png" alt="Stop"></button>
         </div>
 
         <div id="eyeDisplay">👁️</div>
 
         <div class="slider-container">
-            <label>Rest Interval: <span id="valDisplay" style="color:#80cbc4">5</span>s</label><br>
-            <input type="range" id="restRange" min="3" max="10" value="5" oninput="document.getElementById('valDisplay').textContent=this.value">
+            <label>Deep Rest (Close Time): <span id="valDisplay" style="color:#80cbc4">5</span>s</label><br>
+            <input type="range" id="restRange" min="3" max="20" value="5" oninput="document.getElementById('valDisplay').textContent=this.value">
         </div>
 
-        <div class="status-text" id="statusMsg">Ready for peace</div>
+        <div class="status-text" id="statusMsg"><span class="status-ready">READY</span></div>
 
         <div class="t-wrap">
-            <button class="t-btn" onclick="adjustMainTimer(-15)">-</button>
-            <div id="timer">01:00:00</div>
-            <button class="t-btn" onclick="adjustMainTimer(15)">+</button>
+            <div class="reminder-label">Next Reminder In</div>
+            <div class="timer-controls">
+                <button class="t-btn" onclick="adjustMainTimer(-15)">-</button>
+                <div id="timer">01:00:00</div>
+                <button class="t-btn" onclick="adjustMainTimer(15)">+</button>
+            </div>
         </div>
 
         <div class="c-wrap">
             <button class="t-btn" onclick="adjustCycles(-1)">-</button>
-            <h3>Cycle: <span id="currCnt">0</span> / <span id="maxCnt">15</span></h3>
+            <h3>Round: <span id="currCnt">0</span> / <span id="maxCnt">15</span></h3>
             <button class="t-btn" onclick="adjustCycles(1)">+</button>
         </div>
 
         <div class="app-footer">
             <div>
                 Visitors: 
-                <img class="hit-badge" src="https://hits.sh/superbeasy.github.io/SuperEasy/index.html.svg" alt="Hits">
-                | Completed: <span id="sessionCount">0</span>
+                <img class="hit-badge" src="https://hits.sh/superbeasy.github.io/SuperEasy/launch.svg" onerror="this.style.display='none'" alt="Hits">
             </div>
             <div class="privacy-tag">NO PERSONAL DATA COLLECTED</div>
         </div>
@@ -54,26 +89,14 @@
     <script>
         const appBody = document.getElementById('app');
         const playBtn = document.getElementById('playBtn');
-        const sEl = document.getElementById('sessionCount');
-
-        // Since global "Completed" counts are hard without a stable API, 
-        // we track YOUR personal completed sessions in LocalStorage.
-        function updateCompletedCount() {
-            let count = parseInt(localStorage.getItem('completed_eyes')) || 0;
-            count++;
-            localStorage.setItem('completed_eyes', count);
-            sEl.textContent = count;
-        }
-        
-        // Load initial personal count
-        sEl.textContent = localStorage.getItem('completed_eyes') || 0;
+        const statEl = document.getElementById("statusMsg");
 
         let curCycle = 0, isRunning = false, timeRem = 3600, tarCycles = 15;
         let audioCtx, osc, gain, voice;
 
         const cycleEl = document.getElementById("currCnt"), timerEl = document.getElementById("timer");
         const restIn = document.getElementById("restRange"), eyeEl = document.getElementById("eyeDisplay");
-        const statEl = document.getElementById("statusMsg"), maxCycEl = document.getElementById("maxCnt");
+        const maxCycEl = document.getElementById("maxCnt");
 
         function initAudio() {
             if (!audioCtx) {
@@ -83,6 +106,24 @@
                 gain.gain.setValueAtTime(0, audioCtx.currentTime);
                 osc.connect(gain); gain.connect(audioCtx.destination); osc.start();
             }
+        }
+
+        // New chime sound for the 1-hour reminder
+        function playChime() {
+            if (!audioCtx) initAudio();
+            const chimeOsc = audioCtx.createOscillator();
+            const chimeGain = audioCtx.createGain();
+            chimeOsc.connect(chimeGain);
+            chimeGain.connect(audioCtx.destination);
+            
+            const now = audioCtx.currentTime;
+            chimeOsc.frequency.setValueAtTime(880, now); // High A
+            chimeGain.gain.setValueAtTime(0, now);
+            chimeGain.gain.linearRampToValueAtTime(0.2, now + 0.1);
+            chimeGain.gain.exponentialRampToValueAtTime(0.01, now + 1);
+            
+            chimeOsc.start(now);
+            chimeOsc.stop(now + 1);
         }
 
         function setVol(active) { if (gain) gain.gain.setTargetAtTime(active ? 0.1 : 0, audioCtx.currentTime, 1.5); }
@@ -96,7 +137,7 @@
         function speak(text) {
             speechSynthesis.cancel();
             const m = new SpeechSynthesisUtterance(text);
-            if (voice) m.voice = voice; m.rate = 0.7;
+            if (voice) m.voice = voice; m.rate = 0.8;
             speechSynthesis.speak(m);
         }
 
@@ -105,7 +146,7 @@
             playBtn.classList.remove('play-flash');
             initAudio(); if (audioCtx.state === 'suspended') audioCtx.resume();
             isRunning = true; curCycle = 0;
-            statEl.textContent = "Beginning...";
+            statEl.innerHTML = "STARTING";
             runStep();
         }
 
@@ -114,31 +155,33 @@
             if (curCycle >= tarCycles) {
                 appBody.classList.remove('resting');
                 eyeEl.textContent = "✨"; setVol(false);
-                speak("Your session is now complete.");
-                statEl.textContent = "Finished";
+                speak("Session complete. Your eyes are refreshed.");
+                statEl.innerHTML = "FINISHED";
                 isRunning = false; 
-                updateCompletedCount(); // Save your personal progress
+                timeRem = 3600; // Reset reminder to 1 hour
                 return;
             }
             curCycle++; cycleEl.textContent = curCycle;
-            statEl.textContent = "Relaxing...";
+            statEl.innerHTML = "RESTING";
             appBody.classList.add('resting');
             eyeEl.textContent = "😌";
-            setVol(true); speak("Gently close your eyes");
+            setVol(true); speak("Close your eyes");
+            
             setTimeout(() => {
                 if (!isRunning) return;
                 appBody.classList.remove('resting');
-                statEl.textContent = "Breathing...";
+                statEl.innerHTML = "OPEN & BREATHE";
                 eyeEl.textContent = "👁️";
-                setVol(false); speak("Now, slowly open your eyes");
-                setTimeout(() => { if (isRunning) runStep(); }, 5000);
+                setVol(false); speak("Open your eyes");
+                setTimeout(() => { if (isRunning) runStep(); }, 4000);
             }, restIn.value * 1000);
         }
 
         function stopSession() {
             isRunning = false; appBody.classList.remove('resting');
             speechSynthesis.cancel(); if (gain) setVol(false);
-            eyeEl.textContent = "👁️"; statEl.textContent = "Stopped";
+            eyeEl.textContent = "👁️"; 
+            statEl.innerHTML = '<span class="status-ready">READY</span>';
             playBtn.classList.add('play-flash');
         }
 
@@ -147,7 +190,17 @@
         function fmt(s) { return [Math.floor(s/3600), Math.floor(s%3600/60), s%60].map(v => String(v).padStart(2, "0")).join(":"); }
 
         loadVoice();
-        setInterval(() => { if (timeRem > 0) { timeRem--; timerEl.textContent = fmt(timeRem); } }, 1000);
+        setInterval(() => { 
+            if (timeRem > 0) { 
+                timeRem--; 
+                timerEl.textContent = fmt(timeRem); 
+            } else if (timeRem === 0 && !isRunning) {
+                timeRem = -1; // Prevent repeating chime
+                statEl.innerHTML = "TIME TO RELAX!";
+                playBtn.classList.add('play-flash');
+                playChime(); // Notification sound
+            }
+        }, 1000);
     </script>
 </body>
 </html>
