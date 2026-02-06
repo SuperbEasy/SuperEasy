@@ -49,21 +49,36 @@
     <script>
         const REPO_KEY = "SuperEasy-eye-relax";
         
-        async function updateStats(isCompletion = false) {
-            try {
-                const subKey = isCompletion ? 'completed' : 'visitors';
-                const res = await fetch(`https://api.countapi.xyz/hit/${REPO_KEY}/${subKey}`);
-                const data = await res.json();
-                if(isCompletion) {
-                    document.getElementById('sessionCount').textContent = data.value;
-                } else {
-                    document.getElementById('visitCount').textContent = data.value;
-                    const resC = await fetch(`https://api.countapi.xyz/get/${REPO_KEY}/completed`);
-                    const dataC = await resC.json();
-                    document.getElementById('sessionCount').textContent = dataC.value || 0;
-                }
-            } catch (e) { console.log("Stats error"); }
+       async function updateStats(isCompletion = false) {
+    const visitEl = document.getElementById('visitCount');
+    const sessionEl = document.getElementById('sessionCount');
+    
+    // We use a different service: GoatCounter or a simple Hit-Counter
+    // For a quick fix, we'll use the 'api.countapi.xyz' alternative 'countapi.it'
+    const baseUrl = "https://countapi.it/SuperEasy-eye-relax";
+
+    try {
+        if (isCompletion) {
+            const res = await fetch(`${baseUrl}/completed/increment`);
+            const data = await res.json();
+            sessionEl.textContent = data.value;
+        } else {
+            // Increment Visitors
+            const resV = await fetch(`${baseUrl}/visitors/increment`);
+            const dataV = await resV.json();
+            visitEl.textContent = dataV.value;
+
+            // Just Get current Completed count (don't increment)
+            const resC = await fetch(`${baseUrl}/completed/get`);
+            const dataC = await resC.json();
+            sessionEl.textContent = dataC.value || 0;
         }
+    } catch (e) {
+        console.log("Counter Service Busy");
+        // Fallback so it doesn't stay at "..."
+        if(visitEl.textContent === "...") visitEl.textContent = "1";
+    }
+}
 
         let curCycle = 0, isRunning = false, timeRem = 3600, tarCycles = 15;
         let audioCtx, osc, gain, voice;
@@ -139,3 +154,4 @@
     </script>
 </body>
 </html>
+
