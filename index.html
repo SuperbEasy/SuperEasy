@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Eye Relaxation</title>
+    <title>My Eye Relaxation - SuperEasy</title>
     <style>
         html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',sans-serif;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}
         #app{width:90%;max-width:420px;padding:35px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.03);border-radius:40px;box-shadow:0 30px 60px #000;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px);transition:background 3s ease,transform 0.5s ease}
@@ -108,20 +108,17 @@
             }
         }
 
-        // New chime sound for the 1-hour reminder
         function playChime() {
             if (!audioCtx) initAudio();
             const chimeOsc = audioCtx.createOscillator();
             const chimeGain = audioCtx.createGain();
             chimeOsc.connect(chimeGain);
             chimeGain.connect(audioCtx.destination);
-            
             const now = audioCtx.currentTime;
-            chimeOsc.frequency.setValueAtTime(880, now); // High A
+            chimeOsc.frequency.setValueAtTime(880, now);
             chimeGain.gain.setValueAtTime(0, now);
             chimeGain.gain.linearRampToValueAtTime(0.2, now + 0.1);
             chimeGain.gain.exponentialRampToValueAtTime(0.01, now + 1);
-            
             chimeOsc.start(now);
             chimeOsc.stop(now + 1);
         }
@@ -195,10 +192,11 @@
                 timeRem--; 
                 timerEl.textContent = fmt(timeRem); 
             } else if (timeRem === 0 && !isRunning) {
-                timeRem = -1; // Prevent repeating chime
+                // Auto-reset logic
                 statEl.innerHTML = "TIME TO RELAX!";
                 playBtn.classList.add('play-flash');
-                playChime(); // Notification sound
+                playChime();
+                timeRem = 3600; // Automatically reset to 1 hour
             }
         }, 1000);
     </script>
