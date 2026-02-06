@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Eye Relaxation - SuperEasy</title>
     <style>
-        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',sans-serif;background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}#app{width:90%;max-width:420px;padding:40px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.03);border-radius:40px;box-shadow:0 30px 60px #000;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px)}.glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,.03);filter:blur(100px);border-radius:50%;animation:p 8s infinite alternate}@keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}.t-wrap,.c-wrap{display:flex;align-items:center;gap:15px}.t-btn{background:0 0;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:.2s}.t-btn:hover{color:#80cbc4;border-color:#80cbc4}#timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}h2{color:#80cbc4;font-weight:300;margin:10px 0;font-size:20px}#eyeDisplay{font-size:120px;margin:25px 0;transition:1.5s cubic-bezier(.4,0,.2,1)}.slider-container{width:100%;margin:15px 0;text-align:center}input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:0;margin-top:12px}input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:#80cbc4;border-radius:50%;cursor:pointer}label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}.controls{display:flex;gap:25px;margin-top:15px}.icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:.3s}.icon-btn:hover{border-color:#80cbc4;transform:scale(1.05)}.icon-btn img{width:22px;filter:invert(1);opacity:.7}.status-text{margin-top:15px;font-size:14px;color:#aaa;font-style:italic;font-weight:500}h3{font-weight:400;font-size:14px;color:#888;margin:10px 0}.stats-panel{position:fixed;bottom:20px;right:20px;background:rgba(20,20,20,.7);padding:12px 16px;border-radius:15px;font-size:11px;color:#80cbc4;text-align:right;backdrop-filter:blur(10px);border:1px solid rgba(128,203,196,.15);z-index:100;line-height:1.6}.privacy-tag{color:#666;font-size:9px;letter-spacing:1px;border-top:1px solid rgba(255,255,255,.05);margin-top:5px;padding-top:5px;font-weight:700}
+        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',sans-serif;background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}#app{width:90%;max-width:420px;padding:35px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,.03);border-radius:40px;box-shadow:0 30px 60px #000;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px)}.glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,.03);filter:blur(100px);border-radius:50%;animation:p 8s infinite alternate}@keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}.t-wrap,.c-wrap{display:flex;align-items:center;gap:15px}.t-btn{background:0 0;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:.2s}.t-btn:hover{color:#80cbc4;border-color:#80cbc4}#timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}h2{color:#80cbc4;font-weight:300;margin:10px 0;font-size:20px}#eyeDisplay{font-size:120px;margin:20px 0;transition:1.5s cubic-bezier(.4,0,.2,1)}.slider-container{width:100%;margin:10px 0;text-align:center}input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:0;margin-top:10px}input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:#80cbc4;border-radius:50%;cursor:pointer}label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}.controls{display:flex;gap:20px;margin-top:10px}.icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:.3s}.icon-btn:hover{border-color:#80cbc4;transform:scale(1.05)}.icon-btn img{width:20px;filter:invert(1);opacity:.7}.status-text{margin-top:12px;font-size:13px;color:#aaa;font-style:italic}h3{font-weight:400;font-size:13px;color:#888;margin:10px 0}.app-footer{margin-top:25px;padding-top:15px;border-top:1px solid rgba(255,255,255,0.05);width:100%;text-align:center;font-size:11px;color:#80cbc4;line-height:1.6}.privacy-tag{color:#555;font-size:9px;font-weight:700;letter-spacing:1px;margin-top:5px}
     </style>
 </head>
 <body>
@@ -24,17 +24,12 @@
 
         <div class="slider-container">
             <label>Rest Interval: <span id="valDisplay" style="color:#80cbc4">5</span>s</label><br>
-            <input type="range" id="restRange" min="3" max="10" value="5" 
-                   oninput="document.getElementById('valDisplay').textContent=this.value">
+            <input type="range" id="restRange" min="3" max="10" value="5" oninput="document.getElementById('valDisplay').textContent=this.value">
         </div>
 
         <div class="controls">
-            <button class="icon-btn" onclick="startSession()">
-                <img src="https://img.icons8.com/ios-filled/100/play--v1.png" alt="Start">
-            </button>
-            <button class="icon-btn" onclick="stopSession()">
-                <img src="https://img.icons8.com/ios-filled/100/stop.png" alt="Stop">
-            </button>
+            <button class="icon-btn" onclick="startSession()"><img src="https://img.icons8.com/ios-filled/100/play--v1.png"></button>
+            <button class="icon-btn" onclick="stopSession()"><img src="https://img.icons8.com/ios-filled/100/stop.png"></button>
         </div>
 
         <div class="status-text" id="statusMsg">Ready for peace</div>
@@ -44,16 +39,15 @@
             <h3>Cycle: <span id="currCnt">0</span> / <span id="maxCnt">15</span></h3>
             <button class="t-btn" onclick="adjustCycles(1)">+</button>
         </div>
-    </div>
 
-    <div class="stats-panel">
-        <div style="opacity:0.8">Visitors: <span id="visitCount">...</span></div>
-        <div>Completed: <span id="sessionCount">...</span></div>
-        <div class="privacy-tag">NO PERSONAL DATA COLLECTED</div>
+        <div class="app-footer">
+            <div>Visitors: <span id="visitCount">1</span> | Completed: <span id="sessionCount">0</span></div>
+            <div class="privacy-tag">NO PERSONAL DATA COLLECTED</div>
+        </div>
     </div>
 
     <script>
-        const REPO_KEY = "SuperEasy-eye-relax"; 
+        const REPO_KEY = "SuperEasy-eye-relax";
         
         async function updateStats(isCompletion = false) {
             try {
@@ -68,113 +62,80 @@
                     const dataC = await resC.json();
                     document.getElementById('sessionCount').textContent = dataC.value || 0;
                 }
-            } catch (err) {
-                if(!isCompletion) {
-                   document.getElementById('visitCount').textContent = "1";
-                   document.getElementById('sessionCount').textContent = "0";
-                }
-            }
+            } catch (e) { console.log("Stats error"); }
         }
 
-        let currentCycle = 0, isRunning = false, timeRemaining = 3600, targetCycles = 15;
-        let audioCtx, oscillator, gainNode, preferredVoice;
+        let curCycle = 0, isRunning = false, timeRem = 3600, tarCycles = 15;
+        let audioCtx, osc, gain, voice;
 
         const cycleEl = document.getElementById("currCnt"), timerEl = document.getElementById("timer");
-        const restInput = document.getElementById("restRange"), eyeEl = document.getElementById("eyeDisplay");
-        const statusEl = document.getElementById("statusMsg"), maxCycleEl = document.getElementById("maxCnt");
+        const restIn = document.getElementById("restRange"), eyeEl = document.getElementById("eyeDisplay");
+        const statEl = document.getElementById("statusMsg"), maxCycEl = document.getElementById("maxCnt");
 
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                oscillator = audioCtx.createOscillator();
-                gainNode = audioCtx.createGain();
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(120, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                oscillator.start();
+                osc = audioCtx.createOscillator(); gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0, audioCtx.currentTime);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start();
             }
         }
 
-        function setVolumeFade(active) {
-            if (gainNode) gainNode.gain.setTargetAtTime(active ? 0.15 : 0, audioCtx.currentTime, 0.5);
-        }
+        function setVol(active) { if (gain) gain.gain.setTargetAtTime(active ? 0.15 : 0, audioCtx.currentTime, 0.5); }
 
         function loadVoice() {
             const v = speechSynthesis.getVoices();
-            preferredVoice = v.find(x => x.name.includes("Google US English")) || v.find(x => x.name.includes("female")) || v[0];
+            voice = v.find(x => x.name.includes("Google US English")) || v.find(x => x.name.includes("female")) || v[0];
         }
         speechSynthesis.onvoiceschanged = loadVoice;
 
-        function speakPrompt(text) {
+        function speak(text) {
             speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(text);
-            if (preferredVoice) msg.voice = preferredVoice;
-            msg.rate = 0.8;
-            speechSynthesis.speak(msg);
+            const m = new SpeechSynthesisUtterance(text);
+            if (voice) m.voice = voice; m.rate = 0.8;
+            speechSynthesis.speak(m);
         }
 
         async function startSession() {
             if (isRunning) return;
-            initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            isRunning = true; currentCycle = 0;
-            statusEl.textContent = "Beginning...";
-            runCycleStep();
+            initAudio(); if (audioCtx.state === 'suspended') audioCtx.resume();
+            isRunning = true; curCycle = 0;
+            statEl.textContent = "Beginning...";
+            runStep();
         }
 
-        function runCycleStep() {
+        function runStep() {
             if (!isRunning) return;
-            if (currentCycle >= targetCycles) {
-                eyeEl.textContent = "✨"; setVolumeFade(false);
-                speakPrompt("Session complete.");
-                statusEl.textContent = "Finished";
-                isRunning = false; updateStats(true);
-                return;
+            if (curCycle >= tarCycles) {
+                eyeEl.textContent = "✨"; setVol(false);
+                speak("Session complete."); statEl.textContent = "Finished";
+                isRunning = false; updateStats(true); return;
             }
-            currentCycle++;
-            cycleEl.textContent = currentCycle;
-            eyeEl.textContent = "😌";
-            eyeEl.style.filter = "blur(15px)";
-            setVolumeFade(true); speakPrompt("Close your eyes");
+            curCycle++; cycleEl.textContent = curCycle;
+            eyeEl.textContent = "😌"; eyeEl.style.filter = "blur(15px)";
+            setVol(true); speak("Close your eyes");
             setTimeout(() => {
                 if (!isRunning) return;
                 eyeEl.textContent = "👁️"; eyeEl.style.filter = "blur(0px)";
-                setVolumeFade(false); speakPrompt("Slowly open");
-                setTimeout(() => { if (isRunning) runCycleStep(); }, 4000);
-            }, restInput.value * 1000);
+                setVol(false); speak("Slowly open");
+                setTimeout(() => { if (isRunning) runStep(); }, 4000);
+            }, restIn.value * 1000);
         }
 
         function stopSession() {
             isRunning = false; speechSynthesis.cancel();
-            if (gainNode) setVolumeFade(false);
+            if (gain) setVol(false);
             eyeEl.textContent = "👁️"; eyeEl.style.filter = "blur(0px)";
-            statusEl.textContent = "Stopped";
+            statEl.textContent = "Stopped";
         }
 
-        function adjustMainTimer(mins) {
-            timeRemaining = Math.max(0, timeRemaining + (mins * 60));
-            timerEl.textContent = formatTime(timeRemaining);
-        }
+        function adjustMainTimer(m) { timeRem = Math.max(0, timeRem + (m * 60)); timerEl.textContent = fmt(timeRem); }
+        function adjustCycles(d) { tarCycles = Math.max(1, tarCycles + d); maxCycEl.textContent = tarCycles; }
+        function fmt(s) { return [Math.floor(s/3600), Math.floor(s%3600/60), s%60].map(v => String(v).padStart(2, "0")).join(":"); }
 
-        function adjustCycles(delta) {
-            targetCycles = Math.max(1, targetCycles + delta);
-            maxCycleEl.textContent = targetCycles;
-        }
-
-        function formatTime(s) {
-            return [Math.floor(s/3600), Math.floor(s%3600/60), s%60].map(v => String(v).padStart(2, "0")).join(":");
-        }
-
-        loadVoice();
-        updateStats(false);
-        setInterval(() => {
-            if (timeRemaining > 0) {
-                timeRemaining--;
-                timerEl.textContent = formatTime(timeRemaining);
-            }
-        }, 1000);
+        loadVoice(); updateStats(false);
+        setInterval(() => { if (timeRem > 0) { timeRem--; timerEl.textContent = fmt(timeRem); } }, 1000);
     </script>
 </body>
 </html>
