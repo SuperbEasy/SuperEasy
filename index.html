@@ -3,9 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Eye Relaxation</title>
+    <title>My Eye Relaxation - SuperEasy</title>
     <style>
-        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',Roboto,sans-serif;background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}.glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,0.03);filter:blur(100px);border-radius:50%;z-index:0;animation:p 8s infinite alternate}@keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}#app{width:90%;max-width:420px;padding:40px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,0.03);border-radius:40px;box-shadow:0 30px 60px rgba(0,0,0,.8);display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px)}.t-wrap,.c-wrap{display:flex;align-items:center;gap:15px}.t-btn{background:none;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:all .2s}.t-btn:hover{color:#80cbc4;border-color:#80cbc4}#timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}h2{color:#80cbc4;font-weight:300;margin:10px 0;font-size:20px}#eyeDisplay{font-size:120px;margin:25px 0;transition:all 1.5s cubic-bezier(0.4,0,0.2,1)}.slider-container{width:100%;margin:15px 0;text-align:center}input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:none;margin-top:12px}input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:#80cbc4;border-radius:50%;cursor:pointer}label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}.controls{display:flex;gap:25px;margin-top:15px}.icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:all .3s ease}.icon-btn:hover{border-color:#80cbc4;transform:scale(1.05)}.icon-btn img{width:22px;filter:invert(1);opacity:.7}.status-text{margin-top:15px;font-size:14px;color:#aaa;font-style:italic;font-weight:500}h3{font-weight:400;font-size:14px;color:#888;margin:10px 0}
+        html,body{margin:0;padding:0;height:100%;width:100%;font-family:'Segoe UI',Roboto,sans-serif;background:radial-gradient(circle at center,#0a0a0a 0%,#000 100%);display:flex;justify-content:center;align-items:center;overflow:hidden;color:#e0e0e0}
+        .glow{position:absolute;width:450px;height:450px;background:rgba(0,150,136,0.03);filter:blur(100px);border-radius:50%;z-index:0;animation:p 8s infinite alternate}
+        @keyframes p{from{transform:scale(1);opacity:.3}to{transform:scale(1.2);opacity:.6}}
+        
+        #app{width:90%;max-width:420px;padding:40px;background:rgba(20,20,20,.9);border:1px solid rgba(255,255,255,0.03);border-radius:40px;box-shadow:0 30px 60px rgba(0,0,0,.8);display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;backdrop-filter:blur(20px)}
+        
+        .t-wrap,.c-wrap{display:flex;align-items:center;gap:15px}
+        .t-btn{background:none;border:1px solid #444;color:#aaa;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:18px;display:flex;justify-content:center;align-items:center;transition:all .2s}
+        .t-btn:hover{color:#80cbc4;border-color:#80cbc4}
+        
+        #timer{font-size:22px;color:#999;font-family:monospace;letter-spacing:5px}
+        h2{color:#80cbc4;font-weight:300;margin:10px 0;font-size:20px}
+        #eyeDisplay{font-size:120px;margin:25px 0;transition:all 1.5s cubic-bezier(0.4,0,0.2,1)}
+        
+        .slider-container{width:100%;margin:15px 0;text-align:center}
+        input[type=range]{width:100%;height:4px;background:#333;border-radius:5px;appearance:none;outline:none;margin-top:12px}
+        input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;background:#80cbc4;border-radius:50%;cursor:pointer}
+        
+        label{color:#bbb;font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:600}
+        .controls{display:flex;gap:25px;margin-top:15px}
+        .icon-btn{background:#181818;border:1px solid #252525;cursor:pointer;width:60px;height:60px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:all .3s ease}
+        .icon-btn:hover{border-color:#80cbc4;transform:scale(1.05)}
+        .icon-btn img{width:22px;filter:invert(1);opacity:.7}
+        
+        .status-text{margin-top:15px;font-size:14px;color:#aaa;font-style:italic;font-weight:500}
+        h3{font-weight:400;font-size:14px;color:#888;margin:10px 0}
+
+        /* Stats & Privacy Footer Styles */
+        .stats-counter {position: fixed; bottom: 15px; right: 15px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 12px; font-size: 11px; color: #80cbc4; text-align: right; backdrop-filter: blur(10px); border: 1px solid rgba(128,203,196,0.1); z-index: 100;}
+        .privacy-note {position: fixed; bottom: 15px; left: 15px; font-size: 10px; color: #555; letter-spacing: 1px;}
     </style>
 </head>
 <body>
@@ -46,9 +75,42 @@
         </div>
     </div>
 
+    <div class="stats-counter">
+        <div style="opacity:0.7">Global Visitors: <span id="visitCount">...</span></div>
+        <div>Total Relaxations: <span id="sessionCount">...</span></div>
+    </div>
+
+    <div class="privacy-note">NO PERSONAL DATA COLLECTED</div>
+
     <script>
+        // --- Stats Logic ---
+        const REPO_KEY = "SuperEasy-eye-relax"; 
+        
+        async function updateStats(isCompletion = false) {
+            try {
+                // Use a reliable free counter API (Hycnt or similar)
+                const action = isCompletion ? 'hit' : 'hit'; 
+                const subKey = isCompletion ? 'completed' : 'visitors';
+                
+                const res = await fetch(`https://api.countapi.xyz/${action}/${REPO_KEY}/${subKey}`);
+                const data = await res.json();
+                
+                if(isCompletion) {
+                    document.getElementById('sessionCount').textContent = data.value;
+                } else {
+                    document.getElementById('visitCount').textContent = data.value;
+                    // Also fetch the current completion count to display it
+                    const resC = await fetch(`https://api.countapi.xyz/get/${REPO_KEY}/completed`);
+                    const dataC = await resC.json();
+                    document.getElementById('sessionCount').textContent = dataC.value || 0;
+                }
+            } catch (err) {
+                console.log("Stats update skipped");
+            }
+        }
+
         // --- Configuration Constants ---
-        const DEFAULT_TIMER_SECONDS = 3600; // 1 hour in seconds
+        const DEFAULT_TIMER_SECONDS = 3600; 
 
         // --- State Variables ---
         let currentCycle = 0;
@@ -65,7 +127,6 @@
         const statusEl = document.getElementById("statusMsg");
         const maxCycleEl = document.getElementById("maxCnt");
 
-        // --- Notification Logic ---
         function notifyUser(msg) {
             if (!("Notification" in window)) return;
             if (Notification.permission === "granted") {
@@ -73,7 +134,6 @@
             }
         }
 
-        // --- Audio & Speech Setup ---
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -102,23 +162,17 @@
             speechSynthesis.cancel();
             const msg = new SpeechSynthesisUtterance(text);
             if (preferredVoice) msg.voice = preferredVoice;
-            msg.rate = 0.75;
+            msg.rate = 0.8;
             speechSynthesis.speak(msg);
         }
 
-        // --- Core Session Logic ---
         async function startSession() {
             if (isRunning) return;
-
             if ("Notification" in window && Notification.permission !== "denied") {
                 await Notification.requestPermission();
             }
-
-            alert("Set volume to 5-10%. Adjust the slider after the first cycle if it's too slow or fast.");
-
             initAudio();
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            
             isRunning = true;
             currentCycle = 0;
             statusEl.textContent = "Beginning session...";
@@ -132,16 +186,17 @@
                 eyeEl.textContent = "✨";
                 setVolumeFade(false);
                 speakPrompt("Session complete. Your eyes are now refreshed.");
-                notifyUser("Session Complete! Great job.");
+                notifyUser("Session Complete!");
                 statusEl.textContent = "Finished";
                 isRunning = false;
+                updateStats(true); // Increment completion count
                 return;
             }
 
             currentCycle++;
             cycleEl.textContent = currentCycle;
             eyeEl.textContent = "😌";
-            eyeEl.style.filter = "blur(10px)";
+            eyeEl.style.filter = "blur(15px)";
             setVolumeFade(true);
             speakPrompt("Close your eyes");
 
@@ -184,9 +239,8 @@
                     timeRemaining--;
                     timerEl.textContent = formatTime(timeRemaining);
                 } else {
-                    speakPrompt("It is time for your eye break.");
-                    notifyUser("Time for your eye break!");
-                    // Reset using the constant
+                    speakPrompt("Time for your eye break.");
+                    notifyUser("Break Time!");
                     timeRemaining = DEFAULT_TIMER_SECONDS; 
                     timerEl.textContent = formatTime(timeRemaining);
                 }
@@ -195,6 +249,7 @@
 
         loadVoice();
         startClock();
+        updateStats(false); // Log visitor on load
     </script>
 </body>
 </html>
